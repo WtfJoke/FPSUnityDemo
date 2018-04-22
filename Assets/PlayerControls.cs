@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,9 +10,12 @@ public class PlayerControls : MonoBehaviour {
     public int maxRange;
     private Rigidbody objInHand;
     public Transform handPosition;
+    public Transform spawnPosition;
     public float throwForce;
     public float slowMoFactor;
     public GameObject bombPrefab;
+    public GameObject wallPrefab;
+
 
 	// Use this for initialization
 	void Start () {
@@ -62,6 +66,35 @@ public class PlayerControls : MonoBehaviour {
             objInHand = null;
             
 
+        }else if (Input.GetKeyDown(KeyCode.B))
+        {
+            Vector3 gridPosition = GetNearestPointOnGrid(spawnPosition.position, 1f);
+            Vector3 position = new Vector3(gridPosition.x, gridPosition.y + wallPrefab.transform.position.y, gridPosition.z);
+            WallConnection wallConnection = GetComponentInChildren<WallConnection>();
+            Vector3 rotation = GetNearestDegree(transform.rotation.eulerAngles + wallConnection.currentRotation);
+            Quaternion rotationQuaternion = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
+            GameObject placedWall = Instantiate(wallPrefab, position, rotationQuaternion);
+            placedWall.GetComponent<WallConnection>().placed = true;
+
         }
 	}
+
+    public Vector3 GetNearestPointOnGrid(Vector3 currentPosition, float size)
+    {
+        //currentPosition -= transform.position;
+
+        int xCount = Mathf.RoundToInt(currentPosition.x / size);
+        int yCount = Mathf.RoundToInt(currentPosition.y / size);
+        int zCount = Mathf.RoundToInt(currentPosition.z / size);
+
+        Vector3 result = new Vector3((float)xCount * size, (float)yCount * size, (float)zCount * size);
+
+        //result += transform.position;
+        return result;
+    }
+
+    public Vector3 GetNearestDegree(Vector3 rotation)
+    {
+        return GetNearestPointOnGrid(rotation, 90f);
+    }
 }

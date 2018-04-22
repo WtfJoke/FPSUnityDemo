@@ -26,16 +26,6 @@ public class WallConnection : MonoBehaviour
             transform.Rotate(0, 90, 0);
             currentRotation.y = transform.rotation.eulerAngles.y;
         }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-
-            placed = true;
-            //Instantiate<Transform>(wallObj, wallObj.transform.position, wallObj.rotation);
-            
-
-           
-        }
     }
 
     public void OnTriggerEnter(Collider other)

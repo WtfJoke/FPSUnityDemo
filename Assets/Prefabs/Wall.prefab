@@ -152,3 +152,6 @@ MonoBehaviour:
   currentRotation: {x: 0, y: 0, z: 0}
   placed: 0
   wallObj: {fileID: 4067321564652308}
+  interactionLayer:
+    serializedVersion: 2
+    m_Bits: 0

@@ -15,6 +15,7 @@ public class PlayerControls : MonoBehaviour {
     public float slowMoFactor;
     public GameObject bombPrefab;
     public GameObject wallPrefab;
+    public WallConnection previewWall;
 
 
 	// Use this for initialization
@@ -68,16 +69,35 @@ public class PlayerControls : MonoBehaviour {
 
         }else if (Input.GetKeyDown(KeyCode.B))
         {
-            Vector3 gridPosition = GetNearestPointOnGrid(spawnPosition.position, 1f);
-            Vector3 position = new Vector3(gridPosition.x, gridPosition.y + wallPrefab.transform.position.y, gridPosition.z);
-            WallConnection wallConnection = GetComponentInChildren<WallConnection>();
-            Vector3 rotation = GetNearestDegree(transform.rotation.eulerAngles + wallConnection.currentRotation);
+            Vector3 position = GetWallPosition();
+            Vector3 rotation = GetWallRotation();
             Quaternion rotationQuaternion = Quaternion.Euler(rotation.x, rotation.y, rotation.z);
             GameObject placedWall = Instantiate(wallPrefab, position, rotationQuaternion);
             placedWall.GetComponent<WallConnection>().placed = true;
 
         }
-	}
+        WallConnection con = GetComponentInChildren<WallConnection>();
+        con.transform.SetPositionAndRotation(GetWallPosition(), GetWallRotationQuaternion());//Quaternion.Euler(GetNearestDegree(transform.rotation.eulerAngles)));
+    }
+
+    private Vector3 GetWallRotation()
+    {
+        WallConnection wallConnection = GetComponentInChildren<WallConnection>();
+        Vector3 rotation = GetNearestDegree(transform.rotation.eulerAngles + wallConnection.currentRotation);
+        return rotation;
+    }
+
+    private Quaternion GetWallRotationQuaternion()
+    {
+        return Quaternion.Euler(GetWallRotation());
+    }
+
+    private Vector3 GetWallPosition()
+    {
+        Vector3 gridPosition = GetNearestPointOnGrid(spawnPosition.position, 1f);
+        Vector3 position = new Vector3(gridPosition.x + 0.5f, gridPosition.y + wallPrefab.transform.position.y, gridPosition.z + 0.5f);
+        return position;
+    }
 
     public Vector3 GetNearestPointOnGrid(Vector3 currentPosition, float size)
     {

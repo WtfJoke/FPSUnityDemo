@@ -24,6 +24,7 @@ public class WallConnection : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R) && !placed)
         {
             transform.Rotate(0, 90, 0);
+            currentRotation.y = transform.rotation.eulerAngles.y;
         }
 
         if (Input.GetKeyDown(KeyCode.Space))

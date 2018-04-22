@@ -76,14 +76,13 @@ public class PlayerControls : MonoBehaviour {
             placedWall.GetComponent<WallConnection>().placed = true;
 
         }
-        WallConnection con = GetComponentInChildren<WallConnection>();
-        con.transform.SetPositionAndRotation(GetWallPosition(), GetWallRotationQuaternion());//Quaternion.Euler(GetNearestDegree(transform.rotation.eulerAngles)));
+        
+        previewWall.transform.SetPositionAndRotation(GetWallPosition(), GetWallRotationQuaternion());//Quaternion.Euler(GetNearestDegree(transform.rotation.eulerAngles)));
     }
 
     private Vector3 GetWallRotation()
     {
-        WallConnection wallConnection = GetComponentInChildren<WallConnection>();
-        Vector3 rotation = GetNearestDegree(transform.rotation.eulerAngles + wallConnection.currentRotation);
+        Vector3 rotation = GetNearestDegree(transform.rotation.eulerAngles + previewWall.currentRotation);
         return rotation;
     }
 

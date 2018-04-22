@@ -19,13 +19,16 @@ public class PlayerControls : MonoBehaviour
     public WallConnection previewWall;
     public WallConnection previewGround;
     private GameObject selectedBuildObject;
+    private List<WallConnection> previews;
 
 
     // Use this for initialization
     void Start()
     {
-        selectedBuildObject = previewWall.gameObject;
-        previewGround.gameObject.SetActive(false);
+        previews = new List<WallConnection>();
+        previews.Add(previewWall);
+        previews.Add(previewGround);
+        SetBuildObject(previewWall);
     }
 
     // Update is called once per frame
@@ -75,14 +78,10 @@ public class PlayerControls : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            previewWall.gameObject.SetActive(true);
-            selectedBuildObject = previewWall.gameObject;
-            previewGround.gameObject.SetActive(false);
+            SetBuildObject(previewWall);
         }else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            previewGround.gameObject.SetActive(true);
-            selectedBuildObject = previewGround.gameObject;
-            previewWall.gameObject.SetActive(false);
+            SetBuildObject(previewGround);
         }
         else if (Input.GetKeyDown(KeyCode.B))
         {
@@ -162,5 +161,21 @@ public class PlayerControls : MonoBehaviour
     public Vector3 GetNearestDegree(Vector3 rotation)
     {
         return GetNearestPointOnGrid(rotation, 90f);
+    }
+
+    private void SetBuildObject(WallConnection objectToBuild)
+    {
+        foreach (var preview in previews)
+        {
+            if (preview == objectToBuild)
+            {
+                selectedBuildObject = objectToBuild.gameObject;
+                selectedBuildObject.gameObject.SetActive(true);
+            }
+            else
+            {
+                preview.gameObject.SetActive(false);
+            }
+        }
     }
 }

@@ -19,7 +19,7 @@ public class PlayerControls : MonoBehaviour
     public WallConnection previewWall;
     public WallConnection previewGround;
     public WallConnection previewRamp;
-    private GameObject selectedBuildObject;
+    private WallConnection selectedBuildObject;
     private List<WallConnection> previews;
 
 
@@ -92,21 +92,28 @@ public class PlayerControls : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.B))
         {
-            if (ReferenceEquals(selectedBuildObject, previewWall.gameObject))
+            if (selectedBuildObject.isTriggering)
+            {
+                Destroy(selectedBuildObject.triggeredObject);
+                selectedBuildObject.isTriggering = false;
+                selectedBuildObject.triggeredObject = null;
+                return;
+            }
+            if (ReferenceEquals(selectedBuildObject, previewWall))
             {
                 Vector3 position = GetWallPosition();
                 Quaternion rotation = GetWallRotationQuaternion();
                 GameObject placedWall = Instantiate(wallPrefab, position, rotation);
                 placedWall.GetComponent<WallConnection>().placed = true;
             }
-            else if (ReferenceEquals(selectedBuildObject, previewGround.gameObject))
+            else if (ReferenceEquals(selectedBuildObject, previewGround))
             {
                 Vector3 position = GetGroundPosition();
 
                 GameObject placedGround = Instantiate(previewGround.wallObj.gameObject, position, Quaternion.identity);
                 placedGround.GetComponent<WallConnection>().placed = true;
             }
-            else if (ReferenceEquals(selectedBuildObject, previewRamp.gameObject))
+            else if (ReferenceEquals(selectedBuildObject, previewRamp))
             {
                 Vector3 position = GetRampPosition();
 
@@ -116,7 +123,7 @@ public class PlayerControls : MonoBehaviour
         }
 
 
-        if (ReferenceEquals(selectedBuildObject, previewRamp.gameObject))
+        if (ReferenceEquals(selectedBuildObject, previewRamp))
         {
             selectedBuildObject.transform.SetPositionAndRotation(GetPosition(), Quaternion.Euler(GetRampRotation()));
         }
@@ -136,11 +143,11 @@ public class PlayerControls : MonoBehaviour
 
     private Vector3 GetPosition()
     {
-        if (ReferenceEquals(selectedBuildObject, previewWall.gameObject))
+        if (ReferenceEquals(selectedBuildObject, previewWall))
         {
             return GetWallPosition();
         }
-        else if (ReferenceEquals(selectedBuildObject, previewGround.gameObject))
+        else if (ReferenceEquals(selectedBuildObject, previewGround))
         {
             return GetGroundPosition();
         }
@@ -207,7 +214,7 @@ public class PlayerControls : MonoBehaviour
         {
             if (preview == objectToBuild)
             {
-                selectedBuildObject = objectToBuild.gameObject;
+                selectedBuildObject = objectToBuild;
                 selectedBuildObject.gameObject.SetActive(true);
             }
             else

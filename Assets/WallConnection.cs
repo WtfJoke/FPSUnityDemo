@@ -9,6 +9,8 @@ public class WallConnection : MonoBehaviour
     public bool placed = false;
     public Transform wallObj;
     public LayerMask interactionLayer;
+    public bool isTriggering = false;
+    public GameObject triggeredObject;
 
     // Use this for initialization
     void Start()
@@ -30,9 +32,25 @@ public class WallConnection : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
+        WallConnection connection = other.GetComponent<WallConnection>();
         if (other.gameObject.layer == interactionLayer.value)
         {
             Debug.Log("hit interaction layer while building wall");
+        }
+        if (connection != null && connection.placed)
+        {
+            isTriggering = true;
+            triggeredObject = other.gameObject;
+        }
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        WallConnection connection = other.GetComponent<WallConnection>();
+        if (connection != null && connection.placed)
+        {
+            isTriggering = false;
+            triggeredObject = null;
         }
     }
 }   

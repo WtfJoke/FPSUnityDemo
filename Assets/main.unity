@@ -380,7 +380,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dd3c7027be1f07c4b99cd1d4242c4e28, type: 2}
+      objectReference: {fileID: 2100000, guid: 523f30f06afc37443a41ad66d62bdc62, type: 2}
     - target: {fileID: 114238789355197844, guid: 500c6a6b87a15cc4e8b8c8b7d15b4c76,
         type: 2}
       propertyPath: wallObj
@@ -498,7 +498,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dd3c7027be1f07c4b99cd1d4242c4e28, type: 2}
+      objectReference: {fileID: 2100000, guid: 523f30f06afc37443a41ad66d62bdc62, type: 2}
     - target: {fileID: 114989423909790332, guid: d404020f3ac344c469a4fba228caa71f,
         type: 2}
       propertyPath: wallObj
@@ -2089,7 +2089,7 @@ Prefab:
         type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: dd3c7027be1f07c4b99cd1d4242c4e28, type: 2}
+      objectReference: {fileID: 2100000, guid: 523f30f06afc37443a41ad66d62bdc62, type: 2}
     - target: {fileID: 114650999536228304, guid: 2db1249e9698cf248ae44dd143ffae7a,
         type: 2}
       propertyPath: wallObj

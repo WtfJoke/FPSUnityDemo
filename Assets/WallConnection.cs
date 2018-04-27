@@ -13,7 +13,7 @@ public class WallConnection : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        currentRotation.x = transform.rotation.x;
+        currentRotation.x = transform.rotation.eulerAngles.x;
         currentRotation.y = 0;
         currentRotation.z = 0;
     }

@@ -7,6 +7,7 @@ TagManager:
   - Fire
   - Buildable
   - Bullet
+  - Passthrough
   layers:
   - Default
   - TransparentFX

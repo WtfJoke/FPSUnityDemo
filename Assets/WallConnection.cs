@@ -37,7 +37,7 @@ public class WallConnection : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        WallConnection connection = other.GetComponent<WallConnection>();
+        WallConnection connection = other.GetComponentInParent<WallConnection>();
         if (other.gameObject.layer == interactionLayer.value)
         {
             Debug.Log("hit interaction layer while building wall");
@@ -51,8 +51,8 @@ public class WallConnection : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        WallConnection connection = other.GetComponent<WallConnection>();
-        if (connection != null && connection.placed && this.type == connection.type)
+        WallConnection connection = other.GetComponentInParent<WallConnection>();
+        if (connection != null && this.type == connection.type)
         {
             RemoveTrigger();
         }
@@ -71,7 +71,12 @@ public class WallConnection : MonoBehaviour
     {
         isTriggering = false;
         triggeredObject = null;
-        GetComponentInChildren<Renderer>().material = material;
+        Renderer renderer = GetComponentInChildren<Renderer>();
+        if (renderer != null)
+        {
+            renderer.material = material;
+        }
+       
     }
 
     public void DestroyAndRemoveTrigger()

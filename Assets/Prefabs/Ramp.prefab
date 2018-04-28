@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4415943250793052}
   - component: {fileID: 65824475960637772}
   - component: {fileID: 114989423909790332}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Ramp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0, y: 0, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &65888507214867384
 BoxCollider:
@@ -137,7 +137,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.9, y: 0.9, z: 0.9}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114450399465193680
 MonoBehaviour:

@@ -164,7 +164,24 @@ public class PlayerControls : MonoBehaviour
     private Vector3 GetRampPosition()
     {
         Vector3 gridPosition = GetNearestPointOnGrid(spawnPosition.position, 1f);
-        Vector3 position = new Vector3(gridPosition.x + 0.5f, gridPosition.y + 0.05F, gridPosition.z + 0.26f);
+        Vector3 rotation = GetRampRotation();
+        Vector3 position;
+        if (rotation.y  == 0 )
+        {
+            position = new Vector3(gridPosition.x + 0.5f, gridPosition.y + 0.05F, gridPosition.z + 0.26f);
+        }else if (rotation.y == 90)
+        {
+            position = new Vector3(gridPosition.x + 0.26f, gridPosition.y + 0.05F, gridPosition.z + 0.5f);
+        }
+        else if (rotation.y == 180)
+        {
+            position = new Vector3(gridPosition.x + 0.5f, gridPosition.y + 0.05F, gridPosition.z + 0.74f);
+        }
+        else
+        {
+            position = new Vector3(gridPosition.x + 0.74f, gridPosition.y + 0.05F, gridPosition.z + 0.5f);
+        }
+        
         return position;
     }
 

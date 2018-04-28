@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +11,10 @@ public class WallConnection : MonoBehaviour
     public Transform wallObj;
     public LayerMask interactionLayer;
     public bool isTriggering = false;
-    public GameObject triggeredObject;
+    public WallConnectionType type;
+    public Material removableMaterial;
+    private GameObject triggeredObject;
+    private Material material;
 
     // Use this for initialization
     void Start()
@@ -18,6 +22,7 @@ public class WallConnection : MonoBehaviour
         currentRotation.x = transform.rotation.eulerAngles.x;
         currentRotation.y = 0;
         currentRotation.z = 0;
+        material = GetComponentInChildren<Renderer>().material;
     }
 
     // Update is called once per frame
@@ -37,20 +42,41 @@ public class WallConnection : MonoBehaviour
         {
             Debug.Log("hit interaction layer while building wall");
         }
-        if (connection != null && connection.placed)
+        if (connection != null && connection.placed && this.type == connection.type)
         {
-            isTriggering = true;
-            triggeredObject = other.gameObject;
+            AddTrigger(other.gameObject);
+           
         }
     }
 
     public void OnTriggerExit(Collider other)
     {
         WallConnection connection = other.GetComponent<WallConnection>();
-        if (connection != null && connection.placed)
+        if (connection != null && connection.placed && this.type == connection.type)
         {
-            isTriggering = false;
-            triggeredObject = null;
+            RemoveTrigger();
         }
+    }
+
+    private void AddTrigger(GameObject trigger)
+    {
+        isTriggering = true;
+        triggeredObject = trigger;
+        Renderer renderer = GetComponentInChildren<Renderer>();
+        renderer.material = removableMaterial;
+    }
+
+
+    public void RemoveTrigger()
+    {
+        isTriggering = false;
+        triggeredObject = null;
+        GetComponentInChildren<Renderer>().material = material;
+    }
+
+    public void DestroyAndRemoveTrigger()
+    {
+        Destroy(triggeredObject);
+        RemoveTrigger();
     }
 }   

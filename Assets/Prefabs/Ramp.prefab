@@ -155,3 +155,6 @@ MonoBehaviour:
   interactionLayer:
     serializedVersion: 2
     m_Bits: 256
+  isTriggering: 0
+  type: 2
+  removableMaterial: {fileID: 0}

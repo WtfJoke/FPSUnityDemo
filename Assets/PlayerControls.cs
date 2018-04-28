@@ -94,9 +94,7 @@ public class PlayerControls : MonoBehaviour
         {
             if (selectedBuildObject.isTriggering)
             {
-                Destroy(selectedBuildObject.triggeredObject);
-                selectedBuildObject.isTriggering = false;
-                selectedBuildObject.triggeredObject = null;
+                selectedBuildObject.DestroyAndRemoveTrigger();
                 return;
             }
             if (ReferenceEquals(selectedBuildObject, previewWall))

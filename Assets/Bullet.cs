@@ -9,6 +9,10 @@ public class Bullet : MonoBehaviour {
     public void OnTriggerEnter(Collider other)
     {
         Shootable shootable = other.GetComponent<Shootable>();
+        if (shootable == null)
+        {
+            shootable = other.GetComponentInChildren<Shootable>();
+        }
         if (shootable != null)
         {
             shootable.Hit(damage);

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bomb : MonoBehaviour {
+public class Bomb : MonoBehaviour
+{
 
     public float lifeTime;
     public float explosionForce;
@@ -14,12 +15,13 @@ public class Bomb : MonoBehaviour {
     private int damage = 200;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         Invoke("Explode", lifeTime);
-	}
-	
-	void Explode()
+    }
+
+    void Explode()
     {
         List<Collider> hitColliders = new List<Collider>(Physics.OverlapSphere(transform.position, explosionRadius, bombMask));
         hitColliders.AddRange(Physics.OverlapSphere(transform.position, explosionRadius, anotherBombMask));
@@ -34,9 +36,17 @@ public class Bomb : MonoBehaviour {
             }
             if (shootable != null)
             {
-                float distance =  (transform.position - collider.transform.position).sqrMagnitude;
-                int damageDivider = (int)distance * 5;
-                shootable.Hit(damage - damageDivider);
+                float distance = (transform.position - collider.transform.position).sqrMagnitude;
+                int damageReducer = (int)distance * 5;
+                if (damageReducer > damage)
+                {
+                    shootable.Hit(damage);
+                }
+                else
+                {
+                    shootable.Hit(damage - damageReducer);
+                }
+
             }
             Instantiate(explosionEffect, transform.position, Quaternion.identity);
             gameObject.GetComponent<AudioSource>().Play();

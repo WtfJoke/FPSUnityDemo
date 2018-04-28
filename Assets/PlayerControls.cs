@@ -283,6 +283,11 @@ public class PlayerControls : MonoBehaviour
 
     private void SetBuildObject(WallConnection objectToBuild)
     {
+
+        if (selectedBuildObject != null && selectedBuildObject.isTriggering)
+        {
+            selectedBuildObject.RemoveTrigger();
+        }
         foreach (var preview in previews)
         {
             if (preview == objectToBuild)
@@ -295,6 +300,7 @@ public class PlayerControls : MonoBehaviour
                 preview.gameObject.SetActive(false);
             }
         }
+
     }
 
     void Fire()

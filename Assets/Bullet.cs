@@ -17,6 +17,11 @@ public class Bullet : MonoBehaviour {
         {
             shootable.Hit(damage);
         }
-        Destroy(gameObject); // if not shootable - absorb bullet
+
+        if (other.tag != "Passthrough")
+        {
+            Destroy(gameObject); // if not shootable - absorb bullet
+        }
+        
     }
 }

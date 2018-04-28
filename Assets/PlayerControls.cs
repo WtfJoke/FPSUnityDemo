@@ -19,6 +19,7 @@ public class PlayerControls : MonoBehaviour
     public WallConnection previewWall;
     public WallConnection previewGround;
     public WallConnection previewRamp;
+    public WallConnection previewRampDown;
     private WallConnection selectedBuildObject;
     private List<WallConnection> previews;
     public GameObject bulletPrefab;
@@ -32,6 +33,7 @@ public class PlayerControls : MonoBehaviour
         previews.Add(previewWall);
         previews.Add(previewGround);
         previews.Add(previewRamp);
+        previews.Add(previewRampDown);
         SetBuildObject(previewWall);
     }
 
@@ -92,6 +94,10 @@ public class PlayerControls : MonoBehaviour
         {
             SetBuildObject(previewRamp);
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            SetBuildObject(previewRampDown);
+        }
         else if (Input.GetKeyDown(KeyCode.B))
         {
             if (selectedBuildObject.isTriggering)
@@ -120,6 +126,13 @@ public class PlayerControls : MonoBehaviour
                 GameObject placedRamp = Instantiate(previewRamp.wallObj.gameObject, position, Quaternion.Euler(GetRampRotation()));
                 placedRamp.GetComponent<WallConnection>().placed = true;
             }
+            else if (ReferenceEquals(selectedBuildObject, previewRampDown))
+            {
+                Vector3 position = GetPosition();
+                GameObject placedRamp = Instantiate(previewRampDown.wallObj.gameObject, position, Quaternion.Euler(GetRampDownRotation()));
+                placedRamp.GetComponent<WallConnection>().placed = true;
+
+            }
         }
         else if (Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -131,11 +144,15 @@ public class PlayerControls : MonoBehaviour
         {
             selectedBuildObject.transform.SetPositionAndRotation(GetPosition(), Quaternion.Euler(GetRampRotation()));
         }
+        else if (ReferenceEquals(selectedBuildObject, previewRampDown))
+        {
+            selectedBuildObject.transform.SetPositionAndRotation(GetPosition(), Quaternion.Euler(GetRampDownRotation()));
+        }
         else
         {
             selectedBuildObject.transform.SetPositionAndRotation(GetWallPosition(), GetWallRotationQuaternion());
         }
-        
+
 
 
     }
@@ -143,6 +160,11 @@ public class PlayerControls : MonoBehaviour
     private Vector3 GetRampRotation()
     {
         return GetNearestPointOnGrid(previewRamp.currentRotation, 45f);
+    }
+
+    private Vector3 GetRampDownRotation()
+    {
+        return new Vector3(-135f, 0, 0) + previewRampDown.currentRotation;
     }
 
     private Vector3 GetPosition()
@@ -155,9 +177,13 @@ public class PlayerControls : MonoBehaviour
         {
             return GetGroundPosition();
         }
-        else
+        else if (ReferenceEquals(selectedBuildObject, previewRamp))
         {
             return GetRampPosition();
+        }
+        else
+        {
+            return GetRampDownPosition();
         }
     }
 
@@ -166,10 +192,11 @@ public class PlayerControls : MonoBehaviour
         Vector3 gridPosition = GetNearestPointOnGrid(spawnPosition.position, 1f);
         Vector3 rotation = GetRampRotation();
         Vector3 position;
-        if (rotation.y  == 0 )
+        if (rotation.y == 0)
         {
             position = new Vector3(gridPosition.x + 0.5f, gridPosition.y + 0.05F, gridPosition.z + 0.26f);
-        }else if (rotation.y == 90)
+        }
+        else if (rotation.y == 90)
         {
             position = new Vector3(gridPosition.x + 0.26f, gridPosition.y + 0.05F, gridPosition.z + 0.5f);
         }
@@ -181,7 +208,32 @@ public class PlayerControls : MonoBehaviour
         {
             position = new Vector3(gridPosition.x + 0.74f, gridPosition.y + 0.05F, gridPosition.z + 0.5f);
         }
-        
+
+        return position;
+    }
+
+    private Vector3 GetRampDownPosition()
+    {
+        Vector3 gridPosition = GetNearestPointOnGrid(spawnPosition.position, 1f);
+        Vector3 rotation = GetRampDownRotation();
+        Vector3 position;
+        if (rotation.y <= 2)
+        {
+            position = new Vector3(gridPosition.x + 0.5f, gridPosition.y - 0.75f, gridPosition.z + 0.96f);
+        }
+        else if (rotation.y == 90)
+        {
+            position = new Vector3(gridPosition.x + 0.96f, gridPosition.y - 0.75f, gridPosition.z + 0.5f);
+        }
+        else if (rotation.y == 180)
+        {
+            position = new Vector3(gridPosition.x + 0.5f, gridPosition.y - 0.75f, gridPosition.z + 0.04f);
+        }
+        else
+        {
+            position = new Vector3(gridPosition.x + 0.04f, gridPosition.y - 0.75f, gridPosition.z + 0.5f);
+        }
+
         return position;
     }
 
@@ -247,7 +299,7 @@ public class PlayerControls : MonoBehaviour
 
     void Fire()
     {
-        var bullet = Instantiate(bulletPrefab,spawnPosition.position, spawnPosition.rotation);
+        var bullet = Instantiate(bulletPrefab, spawnPosition.position, spawnPosition.rotation);
 
         // Add velocity to the bullet
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 12;

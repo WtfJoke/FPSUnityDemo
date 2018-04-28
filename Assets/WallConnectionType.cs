@@ -7,5 +7,6 @@ public enum WallConnectionType
 {
     FLOOR,
     WALL,
-    RAMP
+    RAMP,
+    RAMPDOWN
 };

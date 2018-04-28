@@ -1762,6 +1762,7 @@ MonoBehaviour:
   previewWall: {fileID: 0}
   previewGround: {fileID: 0}
   previewRamp: {fileID: 0}
+  bulletPrefab: {fileID: 0}
 --- !u!1 &1508336974 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 148850, guid: ee2d107a34692a64e95ce85aed5e41f0, type: 2}
@@ -1795,6 +1796,8 @@ MonoBehaviour:
   previewWall: {fileID: 445346061}
   previewGround: {fileID: 1904849086}
   previewRamp: {fileID: 748719998}
+  bulletPrefab: {fileID: 1434806199419900, guid: a5e7d924eb67ca2469caf5dd819df77d,
+    type: 2}
 --- !u!4 &1514207661 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 4e11ef4f39bc65e44a4b0755ecac6ea1, type: 2}

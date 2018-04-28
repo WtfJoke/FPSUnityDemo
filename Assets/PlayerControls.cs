@@ -21,6 +21,8 @@ public class PlayerControls : MonoBehaviour
     public WallConnection previewRamp;
     private WallConnection selectedBuildObject;
     private List<WallConnection> previews;
+    public GameObject bulletPrefab;
+
 
 
     // Use this for initialization
@@ -118,6 +120,10 @@ public class PlayerControls : MonoBehaviour
                 GameObject placedRamp = Instantiate(previewRamp.wallObj.gameObject, position, Quaternion.Euler(GetRampRotation()));
                 placedRamp.GetComponent<WallConnection>().placed = true;
             }
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Fire();
         }
 
 
@@ -220,5 +226,14 @@ public class PlayerControls : MonoBehaviour
                 preview.gameObject.SetActive(false);
             }
         }
+    }
+
+    void Fire()
+    {
+        var bullet = Instantiate(bulletPrefab,spawnPosition.position, spawnPosition.rotation);
+
+        // Add velocity to the bullet
+        bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 12;
+        Destroy(bullet, 5.0f);
     }
 }

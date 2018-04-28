@@ -6,8 +6,10 @@ public class Shootable : MonoBehaviour
 {
 
     public int hp = 100;
+    public GameObject belongsTo;
     private int originalHp;
     private Material originMaterial;
+    
 
     void Start()
     {
@@ -21,6 +23,7 @@ public class Shootable : MonoBehaviour
         float damagePercent = (float)hp / (float)originalHp;
         if (hp <= 0)
         {
+            Destroy(belongsTo);
             Destroy(gameObject);
         }
         else if (damagePercent <= 0.25)

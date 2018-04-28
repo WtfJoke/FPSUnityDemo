@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
+  belongsTo: {fileID: 1066362032225714}
 --- !u!114 &114989423909790332
 MonoBehaviour:
   m_ObjectHideFlags: 1

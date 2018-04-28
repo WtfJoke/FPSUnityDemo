@@ -22,7 +22,8 @@ public class Shootable : MonoBehaviour
         if (hp <= 0)
         {
             Destroy(gameObject);
-        }else if (damagePercent <= 0.25)
+        }
+        else if (damagePercent <= 0.25)
         {
             getRenderer().material = MaterialHolder.instance.QuarterHealthMaterial;
         }
@@ -34,7 +35,11 @@ public class Shootable : MonoBehaviour
         {
             getRenderer().material = MaterialHolder.instance.ThreeQuarterHealthMaterial;
         }
-        
+        else if (damagePercent <= 0.95)
+        {
+            getRenderer().material = MaterialHolder.instance.OneHitMaterial;
+        }
+
     }
 
     private Material getOriginMaterial()

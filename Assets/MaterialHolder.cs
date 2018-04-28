@@ -5,6 +5,7 @@ using UnityEngine;
 public class MaterialHolder : MonoBehaviour {
 
     public static MaterialHolder instance = null;
+    public Material OneHitMaterial;
     public Material ThreeQuarterHealthMaterial;
     public Material HalfHealthMaterial;
     public Material QuarterHealthMaterial;

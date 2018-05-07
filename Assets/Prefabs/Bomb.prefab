@@ -202,7 +202,7 @@ MonoBehaviour:
   anotherBombMask:
     serializedVersion: 2
     m_Bits: 512
-  explosionEffect: {fileID: 100010, guid: 031d08f52af1daa4f929b85221519426, type: 2}
+  explosionEffect: {fileID: 100010, guid: a507ab3d0f092574194d21ecceb4c486, type: 2}
 --- !u!135 &135425505060601366
 SphereCollider:
   m_ObjectHideFlags: 1

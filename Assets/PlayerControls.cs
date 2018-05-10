@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControls : MonoBehaviour
+public class PlayerControls : Photon.MonoBehaviour
 {
 
-    public Camera cam;
+    public GameObject cam;
     public LayerMask interactionLayer;
     public int maxRange;
     private Rigidbody objInHand;
@@ -23,7 +23,22 @@ public class PlayerControls : MonoBehaviour
     private WallConnection selectedBuildObject;
     private List<WallConnection> previews;
     public GameObject bulletPrefab;
+    [Tooltip("The local player instance. Use this to know if the local player is represented in the Scene")]
+    public static GameObject LocalPlayerInstance;
 
+
+    void Awake()
+    {
+        // #Important
+        // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
+        if (photonView.isMine)
+        {
+            PlayerControls.LocalPlayerInstance = this.gameObject;
+        }
+        // #Critical
+        // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
+        DontDestroyOnLoad(this.gameObject);
+    }
 
 
     // Use this for initialization
@@ -35,11 +50,35 @@ public class PlayerControls : MonoBehaviour
         previews.Add(previewRamp);
         previews.Add(previewRampDown);
         SetBuildObject(previewWall);
+
+        
+        if (cam != null)
+        {
+           
+            if (PhotonNetwork.connected == false)
+            {
+                cam.SetActive(true);
+               
+            }else if (photonView.isMine)
+            {
+                cam.SetActive(true);
+                vThirdPersonCamera actualCam = cam.GetComponent<vThirdPersonCamera>();
+                actualCam.SetTarget(transform);
+            }
+        }
+        else
+        {
+            Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (photonView.isMine == false && PhotonNetwork.connected == true)
+        {
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (Time.timeScale == 1)

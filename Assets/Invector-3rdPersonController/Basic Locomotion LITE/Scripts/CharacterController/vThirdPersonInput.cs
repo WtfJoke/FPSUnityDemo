@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Invector.CharacterController
 {
-    public class vThirdPersonInput : MonoBehaviour
+    public class vThirdPersonInput : Photon.MonoBehaviour
     {
         #region variables
 
@@ -69,12 +69,17 @@ namespace Invector.CharacterController
 
         protected virtual void Update()
         {
+
             cc.UpdateMotor();                   // call ThirdPersonMotor methods               
             cc.UpdateAnimator();                // call ThirdPersonAnimator methods		               
         }
 
         protected virtual void InputHandle()
         {
+            if (photonView.isMine == false && PhotonNetwork.connected == true)
+            {
+                return;
+            }
             ExitGameInput();
             CameraInput();
 

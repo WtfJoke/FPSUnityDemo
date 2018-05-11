@@ -51,20 +51,21 @@ public class PlayerControls : Photon.MonoBehaviour
         previews.Add(previewRampDown);
         SetBuildObject(previewWall);
 
-        
+
         if (cam != null)
         {
-           
-            if (PhotonNetwork.connected == false)
-            {
-                cam.SetActive(true);
-               
-            }else if (photonView.isMine)
-            {
-                cam.SetActive(true);
-                vThirdPersonCamera actualCam = cam.GetComponent<vThirdPersonCamera>();
-                actualCam.SetTarget(transform);
-            }
+
+            //if (PhotonNetwork.connected == false)
+            //{
+            //    cam.SetActive(true);
+
+            //}
+            //else if (photonView.isMine)
+            //{
+            //    cam.SetActive(true);
+            //    vThirdPersonCamera actualCam = cam.GetComponent<vThirdPersonCamera>();
+            //    actualCam.SetTarget(transform);
+            //}
         }
         else
         {

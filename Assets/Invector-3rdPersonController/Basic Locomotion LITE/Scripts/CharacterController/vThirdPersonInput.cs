@@ -76,10 +76,6 @@ namespace Invector.CharacterController
 
         protected virtual void InputHandle()
         {
-            if (photonView.isMine == false && PhotonNetwork.connected == true)
-            {
-                return;
-            }
             ExitGameInput();
             CameraInput();
 

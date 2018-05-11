@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 114268260016291624}
   - component: {fileID: 114938953561010228}
   - component: {fileID: 114856485900772428}
+  - component: {fileID: 114337560755958664}
   m_Layer: 0
   m_Name: vThirdPersonController
   m_TagString: Player
@@ -1290,7 +1291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1875683163227514
 GameObject:
   m_ObjectHideFlags: 1
@@ -3318,6 +3319,23 @@ MonoBehaviour:
   isTriggering: 0
   type: 1
   removableMaterial: {fileID: 2100000, guid: cc1e8cfd2b8dfe346822c2433a4ef630, type: 2}
+--- !u!114 &114337560755958664
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173220724521136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac95d3cec9b8de345ac79c87c66caefd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCamera: {fileID: 1872171772703370}
+  playerControlScripts:
+  - {fileID: 114469775929786556}
+  - {fileID: 114268260016291624}
+  - {fileID: 114006853300282962}
+  - {fileID: 114559204918958496}
 --- !u!114 &114338888034146072
 MonoBehaviour:
   m_ObjectHideFlags: 1

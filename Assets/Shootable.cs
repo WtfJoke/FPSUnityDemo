@@ -45,6 +45,7 @@ public class Shootable : MonoBehaviour
 
     }
 
+ 
     private Material getOriginMaterial()
     {
 
@@ -61,4 +62,5 @@ public class Shootable : MonoBehaviour
         }
         return renderer;
     }
+
 }

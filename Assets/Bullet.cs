@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
+public class Bullet : Photon.PunBehaviour {
 
     public int damage = 10;
 
     public void OnTriggerEnter(Collider other)
     {
         Shootable shootable = other.GetComponent<Shootable>();
+        PlayerControls controls = other.GetComponent<PlayerControls>();
         if (shootable == null)
         {
             shootable = other.GetComponentInChildren<Shootable>();
@@ -17,10 +18,14 @@ public class Bullet : MonoBehaviour {
         {
             shootable.Hit(damage);
         }
+        if (controls != null)
+        {
+            controls.Hit(damage);
+        }
 
         if (other.tag != "Passthrough")
         {
-            Destroy(gameObject); // if not shootable - absorb bullet
+            GameManager.Instance.Destroy(gameObject);  // if not shootable - absorb bullet
         }
         
     }

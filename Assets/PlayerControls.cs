@@ -12,6 +12,7 @@ public class PlayerControls : Photon.MonoBehaviour
     private Rigidbody objInHand;
     public Transform handPosition;
     public Transform spawnPosition;
+    public Transform gunPosition;
     public float throwForce;
     public float slowMoFactor;
     public GameObject bombPrefab;
@@ -19,6 +20,9 @@ public class PlayerControls : Photon.MonoBehaviour
     public WallConnection previewWall;
     public WallConnection previewGround;
     public WallConnection previewRamp;
+    private int health = 100;
+
+
     public WallConnection previewRampDown;
     private WallConnection selectedBuildObject;
     private List<WallConnection> previews;
@@ -182,7 +186,7 @@ public class PlayerControls : Photon.MonoBehaviour
 
         if (ReferenceEquals(selectedBuildObject, previewRamp))
         {
-            selectedBuildObject.transform.SetPositionAndRotation(GetPosition(), Quaternion.Euler(GetRampRotation()));
+            selectedBuildObject.transform.SetPositionAndRotation(GetPosition(),Quaternion.Euler(GetRampRotation()));
         }
         else if (ReferenceEquals(selectedBuildObject, previewRampDown))
         {
@@ -345,11 +349,29 @@ public class PlayerControls : Photon.MonoBehaviour
 
     void Fire()
     {
-        Vector3 bulletSpawn = GameObject.Find("GunPosition").transform.position;
-        var bullet = Instantiate(bulletPrefab, bulletSpawn, spawnPosition.rotation);
+        Vector3 bulletSpawn = gunPosition.position;
+        var bullet = PhotonNetwork.Instantiate(bulletPrefab.name, bulletSpawn, spawnPosition.rotation, 0);
 
         // Add velocity to the bullet
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 12;
-        Destroy(bullet, 5.0f);
+        IEnumerator destroy = DestroyBullet(bullet);
+      
+    }
+
+    internal void Hit(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            GameManager.Instance.LeaveRoom();
+            health = 100;
+        }
+    }
+
+
+    IEnumerator DestroyBullet(GameObject bullet)
+    {
+        yield return new WaitForSeconds(5);
+        GameManager.Instance.Destroy(bullet);
     }
 }

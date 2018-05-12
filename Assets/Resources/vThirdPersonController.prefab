@@ -3289,6 +3289,7 @@ MonoBehaviour:
   maxRange: 15
   handPosition: {fileID: 4860953398792670}
   spawnPosition: {fileID: 4260459579010512}
+  gunPosition: {fileID: 4271024809300332}
   throwForce: 800
   slowMoFactor: 0.25
   bombPrefab: {fileID: 1043676715960324, guid: 738850861383cff48b1e9d5872f7cded, type: 2}
@@ -3335,7 +3336,6 @@ MonoBehaviour:
   - {fileID: 114469775929786556}
   - {fileID: 114268260016291624}
   - {fileID: 114006853300282962}
-  - {fileID: 114559204918958496}
 --- !u!114 &114338888034146072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3441,9 +3441,9 @@ MonoBehaviour:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
     TeleportIfDistanceGreaterThan: 3
-    InterpolateOption: 2
+    InterpolateOption: 4
     InterpolateMoveTowardsSpeed: 1
-    InterpolateLerpSpeed: 1
+    InterpolateLerpSpeed: 10
     InterpolateMoveTowardsAcceleration: 2
     InterpolateMoveTowardsDeceleration: 2
     InterpolateSpeedCurve:
@@ -3526,7 +3526,7 @@ MonoBehaviour:
   group: 0
   OwnerShipWasTransfered: 0
   prefixBackup: -1
-  synchronization: 3
+  synchronization: 1
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0

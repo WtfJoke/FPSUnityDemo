@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControls : Photon.MonoBehaviour
+public class PlayerControls : Photon.PunBehaviour
 {
 
     public GameObject cam;
@@ -20,7 +20,6 @@ public class PlayerControls : Photon.MonoBehaviour
     public WallConnection previewWall;
     public WallConnection previewGround;
     public WallConnection previewRamp;
-    private int health = 100;
 
 
     public WallConnection previewRampDown;
@@ -356,16 +355,6 @@ public class PlayerControls : Photon.MonoBehaviour
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 12;
         IEnumerator destroy = DestroyBullet(bullet);
       
-    }
-
-    internal void Hit(int damage)
-    {
-        health -= damage;
-        if (health <= 0)
-        {
-            GameManager.Instance.LeaveRoom();
-            health = 100;
-        }
     }
 
 

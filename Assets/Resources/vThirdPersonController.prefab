@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 114938953561010228}
   - component: {fileID: 114856485900772428}
   - component: {fileID: 114337560755958664}
+  - component: {fileID: 114839714126831940}
   m_Layer: 0
   m_Name: vThirdPersonController
   m_TagString: Player
@@ -3426,6 +3427,20 @@ MonoBehaviour:
   currentStateName: 
   currentTarget: {fileID: 0}
   movementSpeed: {x: 0, y: 0}
+--- !u!114 &114839714126831940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1173220724521136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287296719f374174c8e2d7cba6b6c9a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hp: 20
+  belongsTo: {fileID: 0}
+  isPlayer: 1
 --- !u!114 &114856485900772428
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3526,7 +3541,7 @@ MonoBehaviour:
   group: 0
   OwnerShipWasTransfered: 0
   prefixBackup: -1
-  synchronization: 1
+  synchronization: 3
   onSerializeTransformOption: 3
   onSerializeRigidBodyOption: 2
   ownershipTransfer: 0

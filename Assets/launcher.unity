@@ -113,34 +113,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &254064192
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 254064193}
-  m_Layer: 0
-  m_Name: ' '
-  m_TagString: Beam
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &254064193
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 254064192}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &416385528
 Prefab:
   m_ObjectHideFlags: 0
@@ -155,6 +127,10 @@ Prefab:
     - target: {fileID: 11414654, guid: f773d1fa10a4f4e0d88490eab5d5b46d, type: 2}
       propertyPath: m_Text
       value: Enter your name and press Play to join room
+      objectReference: {fileID: 0}
+    - target: {fileID: 22414654, guid: f773d1fa10a4f4e0d88490eab5d5b46d, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f773d1fa10a4f4e0d88490eab5d5b46d, type: 2}

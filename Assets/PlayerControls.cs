@@ -36,7 +36,8 @@ public class PlayerControls : Photon.PunBehaviour
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
         if (photonView.isMine)
         {
-           // PlayerControls.LocalPlayerInstance = this.gameObject;
+            // PlayerControls.LocalPlayerInstance = this.gameObject;
+            cam = GameObject.FindGameObjectWithTag("MainCamera");
         }
         // #Critical
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
@@ -116,7 +117,7 @@ public class PlayerControls : Photon.PunBehaviour
             if (objInHand == null)
             {
                 // throw bomb
-                GameObject bomb = GameObject.Instantiate(bombPrefab, handPosition.position, Quaternion.identity);
+                GameObject bomb = PhotonNetwork.Instantiate(bombPrefab.name, handPosition.position, Quaternion.identity, 0);
                 objInHand = bomb.GetComponent<Rigidbody>();
             }
 

@@ -3329,7 +3329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76906cb1762ebac4aab9f12bd0d7c126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 1599748346914616, guid: e775e32ff1c04cb43b49bfe1b0886001, type: 2}
+  cam: {fileID: 0}
   interactionLayer:
     serializedVersion: 2
     m_Bits: 256

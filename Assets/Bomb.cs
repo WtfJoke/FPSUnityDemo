@@ -36,15 +36,17 @@ public class Bomb : MonoBehaviour
             }
             if (shootable != null)
             {
+
                 float distance = (transform.position - collider.transform.position).sqrMagnitude;
                 int damageReducer = (int)distance * 5;
                 if (damageReducer > damage)
                 {
-                    shootable.Hit(damage);
+                    collider.gameObject.GetComponent<PhotonView>().RPC("Hit", PhotonTargets.All, damage);
+                    
                 }
                 else
                 {
-                    shootable.Hit(damage - damageReducer);
+                    collider.gameObject.GetComponent<PhotonView>().RPC("Hit", PhotonTargets.All, damage - damageReducer);
                 }
 
             }

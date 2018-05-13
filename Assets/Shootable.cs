@@ -7,7 +7,6 @@ public class Shootable : Photon.PunBehaviour
 
     public int hp = 100;
     public GameObject belongsTo;
-    public bool isPlayer = false;
     private int originalHp;
     private Material originMaterial;
     
@@ -19,6 +18,7 @@ public class Shootable : Photon.PunBehaviour
         
     }
 
+    [PunRPC]
     public void Hit(int damage)
     {
         hp -= damage;

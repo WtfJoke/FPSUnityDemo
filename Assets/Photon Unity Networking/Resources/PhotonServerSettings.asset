@@ -45,4 +45,5 @@ MonoBehaviour:
   - ActivateObject
   - TakeDamage
   - Activate
+  - Hit
   DisableAutoOpenWizard: 1

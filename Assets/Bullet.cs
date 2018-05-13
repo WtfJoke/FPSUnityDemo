@@ -17,11 +17,12 @@ public class Bullet : Photon.PunBehaviour {
         }
         if (shootable != null)
         {
-            shootable.Hit(damage);
+            //shootable.Hit(damage);
+            other.gameObject.GetComponent<PhotonView>().RPC("Hit", PhotonTargets.All, damage);
         }
         if (health != null)
         {
-            other.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, 20);
+            other.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, damage);
         }
 
         if (other.tag != "Passthrough")

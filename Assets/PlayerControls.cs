@@ -36,11 +36,11 @@ public class PlayerControls : Photon.PunBehaviour
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
         if (photonView.isMine)
         {
-            PlayerControls.LocalPlayerInstance = this.gameObject;
+           // PlayerControls.LocalPlayerInstance = this.gameObject;
         }
         // #Critical
         // we flag as don't destroy on load so that instance survives level synchronization, thus giving a seamless experience when levels load.
-        DontDestroyOnLoad(this.gameObject);
+       // DontDestroyOnLoad(this.gameObject);
     }
 
 
@@ -55,25 +55,25 @@ public class PlayerControls : Photon.PunBehaviour
         SetBuildObject(previewWall);
 
 
-        if (cam != null)
-        {
+        //if (cam != null)
+        //{
 
-            //if (PhotonNetwork.connected == false)
-            //{
-            //    cam.SetActive(true);
+        //    //if (PhotonNetwork.connected == false)
+        //    //{
+        //    //    cam.SetActive(true);
 
-            //}
-            //else if (photonView.isMine)
-            //{
-            //    cam.SetActive(true);
-            //    vThirdPersonCamera actualCam = cam.GetComponent<vThirdPersonCamera>();
-            //    actualCam.SetTarget(transform);
-            //}
-        }
-        else
-        {
-            Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
-        }
+        //    //}
+        //    //else if (photonView.isMine)
+        //    //{
+        //    //    cam.SetActive(true);
+        //    //    vThirdPersonCamera actualCam = cam.GetComponent<vThirdPersonCamera>();
+        //    //    actualCam.SetTarget(transform);
+        //    //}
+        //}
+        //else
+        //{
+        //    Debug.LogError("<Color=Red><a>Missing</a></Color> CameraWork Component on playerPrefab.", this);
+        //}
     }
 
     // Update is called once per frame

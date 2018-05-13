@@ -38,6 +38,8 @@ namespace Invector.CharacterController
 
         protected virtual void Start()
         {
+            if (!photonView.isMine)
+                return;
             CharacterInit();
         }
 
@@ -56,6 +58,8 @@ namespace Invector.CharacterController
 
         protected virtual void LateUpdate()
         {
+            if (!photonView.isMine)
+                return;
             if (cc == null) return;             // returns if didn't find the controller		    
             InputHandle();                      // update input methods
             UpdateCameraStates();               // update camera states
@@ -63,13 +67,16 @@ namespace Invector.CharacterController
 
         protected virtual void FixedUpdate()
         {
+            if (!photonView.isMine)
+                return;
             cc.AirControl();
             CameraInput();
         }
 
         protected virtual void Update()
         {
-
+            if (!photonView.isMine)
+                return;
             cc.UpdateMotor();                   // call ThirdPersonMotor methods               
             cc.UpdateAnimator();                // call ThirdPersonAnimator methods		               
         }

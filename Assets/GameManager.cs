@@ -18,26 +18,26 @@ public class GameManager : Photon.PunBehaviour
     {
         Instance = this;
 
-        if (playerPrefab == null)
-        {
-            Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
-        }
-        else
-        {
-            if (PlayerControls.LocalPlayerInstance == null)
-            {
-                Debug.Log("We are Instantiating LocalPlayer from " + SceneManager.GetActiveScene().name);
-                // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                GameObject player = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
+        //if (playerPrefab == null)
+        //{
+        //    Debug.LogError("<Color=Red><a>Missing</a></Color> playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
+        //}
+        //else
+        //{
+        //    if (PlayerControls.LocalPlayerInstance == null)
+        //    {
+        //        Debug.Log("We are Instantiating LocalPlayer from " + SceneManager.GetActiveScene().name);
+        //        // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+        //        GameObject player = PhotonNetwork.Instantiate(this.playerPrefab.name, new Vector3(0f, 5f, 0f), Quaternion.identity, 0);
 
-                player.name = "Player" + PhotonNetwork.countOfPlayersInRooms;
+        //        player.name = "Player" + PhotonNetwork.countOfPlayersInRooms;
 
-            }
-            else
-            {
-                Debug.Log("Ignoring scene load for " + SceneManager.GetActiveScene().name);
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        Debug.Log("Ignoring scene load for " + SceneManager.GetActiveScene().name);
+        //    }
+        //}
     }
 
 
@@ -110,7 +110,7 @@ public class GameManager : Photon.PunBehaviour
             Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
         }
         Debug.Log("PhotonNetwork : Loading Level : " + PhotonNetwork.room.PlayerCount);
-        PhotonNetwork.LoadLevel("main");
+       // PhotonNetwork.LoadLevel("main");
     }
 
 

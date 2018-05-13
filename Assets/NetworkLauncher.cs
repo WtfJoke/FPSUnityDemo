@@ -8,9 +8,6 @@ public class NetworkLauncher : Photon.PunBehaviour
 
     #region Public Variables
 
-    [Tooltip("The Ui Panel to let the user enter name, connect and play")]
-    public GameObject controlPanel;
-
     [Tooltip("The Ui Text to inform the user about the connection progress")]
     public Text feedbackText;
 
@@ -67,7 +64,12 @@ public class NetworkLauncher : Photon.PunBehaviour
     void Start()
     {
         feedbackText.gameObject.SetActive(false);
-        controlPanel.SetActive(true);
+        Connect();
+    }
+
+    private void Update()
+    {
+        feedbackText.text = PhotonNetwork.connectionStateDetailed.ToString();
     }
 
 
@@ -85,7 +87,6 @@ public class NetworkLauncher : Photon.PunBehaviour
     public void Connect()
     {
         feedbackText.gameObject.SetActive(true);
-        controlPanel.SetActive(false);
         // keep track of the will to join a room, because when we come back from the game we will get a callback that we are connected, so we need to know what to do then
         isConnecting = true;
         if (loaderAnime != null)
@@ -127,7 +128,6 @@ public class NetworkLauncher : Photon.PunBehaviour
     {
         Debug.LogWarning("DemoAnimator/Launcher: OnDisconnectedFromPhoton() was called by PUN");
         feedbackText.gameObject.SetActive(false);
-        controlPanel.SetActive(true);
         PhotonNetwork.LeaveRoom();
     }
 

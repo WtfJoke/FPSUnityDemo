@@ -44,4 +44,5 @@ MonoBehaviour:
   - TaggedPlayer
   - ActivateObject
   - TakeDamage
+  - Activate
   DisableAutoOpenWizard: 1

@@ -329,8 +329,6 @@ GameObject:
   - component: {fileID: 114268260016291624}
   - component: {fileID: 114938953561010228}
   - component: {fileID: 114856485900772428}
-  - component: {fileID: 114337560755958664}
-  - component: {fileID: 114839714126831940}
   - component: {fileID: 114742835791827566}
   m_Layer: 0
   m_Name: vThirdPersonController
@@ -3246,22 +3244,6 @@ MonoBehaviour:
   isTriggering: 0
   type: 1
   removableMaterial: {fileID: 2100000, guid: cc1e8cfd2b8dfe346822c2433a4ef630, type: 2}
---- !u!114 &114337560755958664
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1173220724521136}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac95d3cec9b8de345ac79c87c66caefd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
-  playerControlScripts:
-  - {fileID: 114469775929786556}
-  - {fileID: 114268260016291624}
-  - {fileID: 114006853300282962}
 --- !u!114 &114338888034146072
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3333,20 +3315,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerHealth: 20
---- !u!114 &114839714126831940
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1173220724521136}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 287296719f374174c8e2d7cba6b6c9a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hp: 20
-  belongsTo: {fileID: 0}
-  isPlayer: 1
 --- !u!114 &114856485900772428
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -22,29 +22,6 @@ public class Shootable : Photon.PunBehaviour
     public void Hit(int damage)
     {
         hp -= damage;
-        if (isPlayer)
-        {
-            var view = GetComponent<PhotonView>();
-            Debug.LogWarning("isMine " + view.isMine);
-            if (hp <= 0)
-            {
-                //PhotonNetwork.LeaveRoom();
-                // PhotonNetwork.Destroy(gameObject);
-                var transformview = GetComponent<PhotonTransformView>();
-                transformview.enabled = false;
-
-                // photonView.enabled = false;
-                //GetComponent<Rigidbody>().useGravity = false;
-                //GetComponent<Rigidbody>().isKinematic = true;
-                //GetComponent<CapsuleCollider>().enabled = false;
-                transform.position = new Vector3(0, 5f, 0);
-                transformview.enabled = true;
-
-                //photonView.enabled = true;
-                //hp = originalHp;
-            }
-            return;
-        }
         float damagePercent = (float)hp / (float)originalHp;
         if (hp <= 0)
         {

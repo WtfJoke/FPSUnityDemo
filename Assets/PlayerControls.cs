@@ -152,27 +152,27 @@ public class PlayerControls : Photon.PunBehaviour
             {
                 Vector3 position = GetWallPosition();
                 Quaternion rotation = GetWallRotationQuaternion();
-                GameObject placedWall = Instantiate(wallPrefab, position, rotation);
+                GameObject placedWall = PhotonNetwork.Instantiate(wallPrefab.name, position, rotation, 0);
                 placedWall.GetComponent<WallConnection>().placed = true;
             }
             else if (ReferenceEquals(selectedBuildObject, previewGround))
             {
                 Vector3 position = GetGroundPosition();
 
-                GameObject placedGround = Instantiate(previewGround.wallObj.gameObject, position, Quaternion.identity);
+                GameObject placedGround = PhotonNetwork.Instantiate(previewGround.wallObj.gameObject.name, position, Quaternion.identity, 0);
                 placedGround.GetComponent<WallConnection>().placed = true;
             }
             else if (ReferenceEquals(selectedBuildObject, previewRamp))
             {
                 Vector3 position = GetRampPosition();
 
-                GameObject placedRamp = Instantiate(previewRamp.wallObj.gameObject, position, Quaternion.Euler(GetRampRotation()));
+                GameObject placedRamp = PhotonNetwork.Instantiate(previewRamp.wallObj.gameObject.name, position, Quaternion.Euler(GetRampRotation()), 0);
                 placedRamp.GetComponent<WallConnection>().placed = true;
             }
             else if (ReferenceEquals(selectedBuildObject, previewRampDown))
             {
                 Vector3 position = GetPosition();
-                GameObject placedRamp = Instantiate(previewRampDown.wallObj.gameObject, position, Quaternion.Euler(GetRampDownRotation()));
+                GameObject placedRamp = PhotonNetwork.Instantiate(previewRampDown.wallObj.gameObject.name, position, Quaternion.Euler(GetRampDownRotation()), 0);
                 placedRamp.GetComponent<WallConnection>().placed = true;
 
             }

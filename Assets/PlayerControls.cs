@@ -356,7 +356,7 @@ public class PlayerControls : Photon.PunBehaviour
         // Add velocity to the bullet
         bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * 12;
         IEnumerator destroy = DestroyBullet(bullet);
-      
+        StartCoroutine(destroy);
     }
 
 

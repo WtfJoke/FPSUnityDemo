@@ -6,7 +6,6 @@ public class Shootable : Photon.PunBehaviour
 {
 
     public int hp = 100;
-    public GameObject belongsTo;
     private int originalHp;
     private Material originMaterial;
     
@@ -25,8 +24,7 @@ public class Shootable : Photon.PunBehaviour
         float damagePercent = (float)hp / (float)originalHp;
         if (hp <= 0)
         {
-            Destroy(belongsTo);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
         else if (damagePercent <= 0.25)
         {

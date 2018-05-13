@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 114938953561010228}
   - component: {fileID: 114856485900772428}
   - component: {fileID: 114742835791827566}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: vThirdPersonController
   m_TagString: Player
   m_Icon: {fileID: 0}

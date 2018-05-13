@@ -30,30 +30,42 @@ public class Bomb : MonoBehaviour
         {
             Rigidbody colliderBody = collider.GetComponent<Rigidbody>();
             Shootable shootable = collider.GetComponent<Shootable>();
+            var health = collider.GetComponent<Health>();
+
             if (colliderBody != null)
             {
                 colliderBody.AddExplosionForce(explosionForce, transform.position, explosionRadius, upModifier);
             }
-            if (shootable != null)
+            if (shootable != null || health != null)
             {
 
                 float distance = (transform.position - collider.transform.position).sqrMagnitude;
                 int damageReducer = (int)distance * 5;
-                if (damageReducer > damage)
+                int newDamage = damageReducer > damage ? damage : damage - damageReducer;
+
+                if (collider.gameObject.tag == "Player")
                 {
-                    collider.gameObject.GetComponent<PhotonView>().RPC("Hit", PhotonTargets.All, damage);
-                    
+                    collider.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, newDamage);
                 }
                 else
                 {
-                    collider.gameObject.GetComponent<PhotonView>().RPC("Hit", PhotonTargets.All, damage - damageReducer);
+                    collider.gameObject.GetComponent<PhotonView>().RPC("Hit", PhotonTargets.All, newDamage);
                 }
 
             }
-            Instantiate(explosionEffect, transform.position, Quaternion.identity);
+            Destroy(Instantiate(explosionEffect, transform.position, Quaternion.identity), 4f);
             gameObject.GetComponent<AudioSource>().Play();
             gameObject.GetComponent<Renderer>().enabled = false;
-            Invoke("destroy", 2);
+            IEnumerator destroy = DestroyBomb(gameObject);
+            StartCoroutine(destroy);
+            
         }
+    }
+
+
+    IEnumerator DestroyBomb(GameObject bomb)
+    {
+        yield return new WaitForSeconds(2);
+        GameManager.Instance.Destroy(bomb);
     }
 }

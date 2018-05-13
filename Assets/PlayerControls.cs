@@ -79,7 +79,7 @@ public class PlayerControls : Photon.PunBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (photonView.isMine == false && PhotonNetwork.connected == true)
+        if (!photonView.isMine)
         {
             return;
         }

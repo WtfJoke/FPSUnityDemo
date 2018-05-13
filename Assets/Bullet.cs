@@ -13,7 +13,7 @@ public class Bullet : Photon.PunBehaviour {
             return;
         }
         Shootable shootable = other.GetComponent<Shootable>();
-        PlayerControls controls = other.GetComponent<PlayerControls>();
+        var health = other.GetComponent<Health>();
         if (shootable == null)
         {
             shootable = other.GetComponentInChildren<Shootable>();
@@ -21,6 +21,10 @@ public class Bullet : Photon.PunBehaviour {
         if (shootable != null)
         {
             shootable.Hit(damage);
+        }
+        if (health != null)
+        {
+            other.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", PhotonTargets.All, 20);
         }
 
         if (other.tag != "Passthrough")

@@ -152,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 100
   belongsTo: {fileID: 1085622906824342}
+  isPlayer: 0
 --- !u!114 &114650999536228304
 MonoBehaviour:
   m_ObjectHideFlags: 1

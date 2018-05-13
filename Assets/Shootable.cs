@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Shootable : Photon.PunBehaviour
 {
@@ -10,13 +8,12 @@ public class Shootable : Photon.PunBehaviour
     public bool isPlayer = false;
     private int originalHp;
     private Material originMaterial;
-    
 
     void Start()
     {
         originMaterial = getOriginMaterial();
         originalHp = hp;
-        
+
     }
 
     public void Hit(int damage)
@@ -28,20 +25,8 @@ public class Shootable : Photon.PunBehaviour
             Debug.LogWarning("isMine " + view.isMine);
             if (hp <= 0)
             {
-                //PhotonNetwork.LeaveRoom();
-                // PhotonNetwork.Destroy(gameObject);
-                var transformview = GetComponent<PhotonTransformView>();
-                transformview.enabled = false;
-
-                // photonView.enabled = false;
-                //GetComponent<Rigidbody>().useGravity = false;
-                //GetComponent<Rigidbody>().isKinematic = true;
-                //GetComponent<CapsuleCollider>().enabled = false;
                 transform.position = new Vector3(0, 5f, 0);
-                transformview.enabled = true;
-
-                //photonView.enabled = true;
-                //hp = originalHp;
+                hp = originalHp;
             }
             return;
         }
@@ -70,7 +55,7 @@ public class Shootable : Photon.PunBehaviour
 
     }
 
- 
+
     private Material getOriginMaterial()
     {
 
@@ -87,7 +72,4 @@ public class Shootable : Photon.PunBehaviour
         }
         return renderer;
     }
-
-    
-
 }

@@ -8,10 +8,6 @@ public class Bullet : Photon.PunBehaviour {
 
     public void OnTriggerEnter(Collider other)
     {
-        if (!photonView.isMine)
-        {
-            return;
-        }
         Shootable shootable = other.GetComponent<Shootable>();
         PlayerControls controls = other.GetComponent<PlayerControls>();
         if (shootable == null)

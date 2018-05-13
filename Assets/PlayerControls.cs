@@ -185,7 +185,8 @@ public class PlayerControls : Photon.PunBehaviour
 
         if (ReferenceEquals(selectedBuildObject, previewRamp))
         {
-            selectedBuildObject.transform.SetPositionAndRotation(GetPosition(),Quaternion.Euler(GetRampRotation()));
+            Vector3 rotation = GetRampRotation();
+            selectedBuildObject.transform.SetPositionAndRotation(GetPosition(), Quaternion.Euler(rotation));
         }
         else if (ReferenceEquals(selectedBuildObject, previewRampDown))
         {
@@ -202,7 +203,7 @@ public class PlayerControls : Photon.PunBehaviour
 
     private Vector3 GetRampRotation()
     {
-        return GetNearestPointOnGrid(previewRamp.currentRotation, 45f);
+        return GetNearestPointOnGrid(previewRamp.currentRotation, 45f) + new Vector3(-45, 180, 0);
     }
 
     private Vector3 GetRampDownRotation()
